@@ -72,6 +72,19 @@ public class SecurityConfig {
                         // SUPER_ADMIN
                         .requestMatchers(HttpMethod.DELETE, "/api/leave-requests/**").hasRole("SUPER_ADMIN")
 
+                        // NOTIFICATIONS
+                        .requestMatchers(HttpMethod.GET, "/api/notifications").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/{id}").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/my").authenticated()
+                        .requestMatchers(HttpMethod.PATCH, "/api/notifications/*/read").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/notifications").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/notifications/**").hasRole("SUPER_ADMIN")
+
+                        // SUSPICIOUS ACTIVITY
+                        .requestMatchers(HttpMethod.GET, "/api/suspicious-activity/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/suspicious-activity/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/suspicious-activity/**").hasRole("SUPER_ADMIN")
+
                         // fallback
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())

@@ -20,7 +20,7 @@ public class SuspiciousActivityLog {
     private String description;
     private Double latitude;
     private Double longitude;
-    private LocalDateTime createt_at;
+    private LocalDateTime created_at;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
